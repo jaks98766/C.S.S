@@ -19,8 +19,9 @@
     }
 
     body {
+      margin-top: 20px;
       font-family: Arial, Helvetica, sans-serif;
-      background: #181818;
+      background: #151922;
       color: #EFEFEF;
       font-size: 16px;
       display: flex;
@@ -82,6 +83,7 @@
     #content-left {
       max-width: 400px;
       flex: 1;
+      margin-right: 25px;
     }
 
     #content-right {
@@ -114,6 +116,8 @@
       border-radius: 5px;
       resize: none;
       box-sizing: border-box;
+      text-align: center;
+      font-weight: bold;
     }
 
     button {
@@ -121,13 +125,15 @@
       margin: 5px 0;
       padding: 0 12px;
       border: 0;
-      width: 48%;
       line-height: 28px;
       cursor: pointer;
       color: #fff;
       background: #ff3034;
-      border-radius: 5px;
-      font-size: 16px;
+      font-family: 'Courier New', monospace;
+      font-weight: bolder;
+      border-radius: 7px;
+      letter-spacing: 1px;
+      font-size: 17px;
       outline: 0;
     }
 
@@ -136,7 +142,7 @@
     }
 
     button:hover {
-      background: #ff494d;
+      background: #ff3033a9;
     }
 
     button:active {
@@ -223,13 +229,18 @@
     </div>
   </div>
   <script>
+    function authlogin() {
+      if (localStorage.getItem('SYS-LOGIN') != null) {
+      } else {
+        showLogin();
+      }
+    }
     document.addEventListener("DOMContentLoaded", function (event) {
-      showLogin(); // for current login
+      authlogin();
       var baseHost = document.location.origin;
       var streamUrl = baseHost + ":81";
       const WS_URL = "ws://" + window.location.host + ":82";
       const ws = new WebSocket(WS_URL);
-
       const view = document.getElementById("stream");
       const personFormField = document.getElementById("person");
       const streamButton = document.getElementById("button-stream");
@@ -254,7 +265,6 @@
 
       ws.onopen = () => {
         console.log(`Connected to ${WS_URL}`);
-        showLogin();
       };
       ws.onmessage = message => {
         if (typeof message.data === "string") {
@@ -331,10 +341,11 @@
     function login() {
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
-      
+
       // Perform your login logic here, for example:
-      if (username === "admin" && password === "password") {
+      if (username === "admin" && password === "73754231") {
         // If login successful, hide login overlay
+        localStorage.setItem('SYS-LOGIN', 'Auth:4535');
         document.getElementById("login-btn").style.backgroundColor = "green";
         document.getElementById("login-btn").style.display = "none";
         setTimeout(()=> {

@@ -8,8 +8,8 @@
 #include "fr_forward.h"
 #include "fr_flash.h"
 
-const char* ssid = "HN_WIFI";
-const char* password = "DHN7776913777";
+const char* ssid = "VasiliadiCAR";
+const char* password = "12345678";
 
 #define ENROLL_CONFIRM_TIMES 5
 #define FACE_ID_SAVE_NUMBER 7
@@ -226,7 +226,7 @@ static esp_err_t delete_all_faces(WebsocketsClient &client)
   delete_face_all_in_flash_with_name(&st_face_list);
   client.send("delete_faces");
 }
-
+//HTML MESSAGE SYSTEM
 void handle_message(WebsocketsClient &client, WebsocketsMessage msg)
 {
   if (msg.data() == "stream") {
